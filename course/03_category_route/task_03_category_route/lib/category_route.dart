@@ -6,9 +6,11 @@
 
 import 'package:flutter/material.dart';
 
-// TODO: Check if we need to import anything
+// DONE: Check if we need to import anything
+import 'package:task_03_category_route/category.dart';
 
-// TODO: Define any constants
+// DONE: Define any constants
+final _backgroundColor = Colors.green.shade100;
 
 /// Category Route (screen).
 ///
@@ -31,7 +33,7 @@ class CategoryRoute extends StatelessWidget {
     'Currency',
   ];
 
-  static const _baseColors = <Color>[
+  static const _baseColors = <ColorSwatch>[
     Colors.teal,
     Colors.orange,
     Colors.pinkAccent,
@@ -44,15 +46,42 @@ class CategoryRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Create a list of the eight Categories, using the names and colors
+    // DONE: Create a list of the eight Categories, using the names and colors
     // from above. Use a placeholder icon, such as `Icons.cake` for each
     // Category. We'll add custom icons later.
+    final _categories = <Category>[];
+    for (var i = 0; i < 8; i++) {
+      _categories.add(Category(
+        name: _categoryNames[i],
+        color: _baseColors[i],
+        iconLocation: Icons.cake,
+      ));
+    }
 
-    // TODO: Create a list view of the Categories
-    final listView = Container();
+    // DONE: Create a list view of the Categories
+    final listView = Container(
+      color: _backgroundColor,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: _categories.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _categories[index];
+        },
+      ),
+    );
 
-    // TODO: Create an App Bar
-    final appBar = AppBar();
+    // DONE: Create an App Bar
+    final appBar = AppBar(
+      elevation: 0,
+      backgroundColor: _backgroundColor,
+      title: const Text(
+        'Unit Converter',
+        style: TextStyle(
+          fontSize: 30.0,
+          color: Colors.black,
+        ),
+      ),
+    );
 
     return Scaffold(
       appBar: appBar,
